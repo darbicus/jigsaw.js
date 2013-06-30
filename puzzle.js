@@ -1,7 +1,7 @@
 var pieces = new Array();
 var puzzle = (function () {
-    var xmax = 13.0;
-    var ymax = 13.0;
+    var xmax = 5.0;
+    var ymax = 5.0;
     var canvasarray = new Array();
     var imagesave = new Image();
     return {
@@ -37,15 +37,17 @@ var puzzle = (function () {
                         c.setAttribute("outright", (Math.round(Math.random()) === 1) ? "true" : "false");
                         c.setAttribute("outbottom", (Math.round(Math.random()) === 1) ? "true" : "false");
                         //c.setAttribute("topedge",(((Math.random()/2.0)+.5)*hsize));
-                        if (i + (wsize * 2.0) <= imagesave.width) {
+                        if (i + (wsize * 2.0)-1 <= imagesave.width) {
                             c.setAttribute("rightedge", (((Math.random() / 5.0) + .5) * Math.sqrt((wsize * wsize) + (hsize * hsize)) / 2.0));
                             if (c.getAttribute("outright") == "true") {
+                                c.getContext("2d").moveTo((((xpos < 0) ? 0 : (wsize / 2.0)) + wsize) + (parseInt(c.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0));
                                 c.getContext("2d").arc(
                                 (((xpos < 0) ? 0 : (wsize / 2.0)) + wsize) + (parseInt(c.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0), parseInt(c.getAttribute("rightedge")) / 4.0, 0, Math.PI * 2, false);
                             }
                         }
                         if (i !== 0) {
                             if (piecetoleft.getAttribute("outright") == "false") {
+                                c.getContext('2d').moveTo((((xpos < 0) ? 0 : (wsize / 2.0))) - (parseInt(piecetoleft.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0));
                                 c.getContext("2d").arc(
                                 (((xpos < 0) ? 0 : (wsize / 2.0))) - (parseInt(piecetoleft.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0), parseInt(piecetoleft.getAttribute("rightedge")) / 4.0, 0, Math.PI * 2, false);
                             }
@@ -53,12 +55,13 @@ var puzzle = (function () {
                         if (j + (hsize * 2.0) <= imagesave.height) {
                             c.setAttribute("bottomedge", (((Math.random() / 4.0) + .5) * Math.sqrt((wsize * wsize) + (hsize * hsize)) / 2.0));
                             if (c.getAttribute("outbottom") == "true") {
-
+                                c.getContext("2d").moveTo(((i + (wsize * 2.0) > imagesave.width) ? wsize / 4.0 : 0) + ((xpos < 0) ? (wsize / 2.0) : width / 2.0), (height - ((j !== 0) ? (hsize / 2.0) : (hsize))) + (parseInt(c.getAttribute("bottomedge")) / 7.0));
                                 c.getContext("2d").arc(((i + (wsize * 2.0) > imagesave.width) ? wsize / 4.0 : 0) + ((xpos < 0) ? (wsize / 2.0) : width / 2.0), (height - ((j !== 0) ? (hsize / 2.0) : (hsize))) + (parseInt(c.getAttribute("bottomedge")) / 7.0), parseInt(c.getAttribute("bottomedge")) / 4.0, 0, Math.PI * 2, false);
                             }
                         }
                         if (j !== 0) {
                             if (pieceabove.getAttribute("outbottom") == "false") {
+                                c.getContext("2d").moveTo(((i + (wsize * 2.0) > imagesave.width) ? wsize / 4.0 : 0) + ((xpos < 0) ? (wsize / 2.0) : width / 2.0), (((j !== 0) ? (hsize / 2.0) : (hsize))) - (parseInt(pieceabove.getAttribute("bottomedge")) / 7.0));
                                 c.getContext("2d").arc(((i + (wsize * 2.0) > imagesave.width) ? wsize / 4.0 : 0) + ((xpos < 0) ? (wsize / 2.0) : width / 2.0), (((j !== 0) ? (hsize / 2.0) : (hsize))) - (parseInt(pieceabove.getAttribute("bottomedge")) / 7.0), parseInt(pieceabove.getAttribute("bottomedge")) / 4.0, 0, Math.PI * 2, false);
                             }
                         }
@@ -89,7 +92,6 @@ var puzzle = (function () {
                         if (i !== 0) {
                             if (piecetoleft.getAttribute("outright") == "true") {
                                 c.getContext("2d").beginPath();
-								c.getContext("2d").moveTo((((xpos < 0) ? 0 : (wsize / 2.0))) + (parseInt(piecetoleft.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0));
                                 c.getContext("2d").arc(
                                 (((xpos < 0) ? 0 : (wsize / 2.0))) + (parseInt(piecetoleft.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0), parseInt(piecetoleft.getAttribute("rightedge")) / 4.0, 0, Math.PI * 2, true);
                                 c.getContext('2d').fill();
@@ -98,10 +100,9 @@ var puzzle = (function () {
                             }
                         }
                         //
-                        if (i + (wsize * 2.0) <= imagesave.width) {
+                        if (i + (wsize * 2.0)-1 <= imagesave.width) {
                             if (c.getAttribute("outright") == "false") {
                                 c.getContext("2d").beginPath();
-								c.getContext("2d").moveTo((((xpos < 0) ? 0 : (wsize / 2.0)) + wsize) - (parseInt(c.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0));
                                 c.getContext("2d").arc(
                                 (((xpos < 0) ? 0 : (wsize / 2.0)) + wsize) - (parseInt(c.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0), parseInt(c.getAttribute("rightedge")) / 4.0, 0, Math.PI * 2, true);
                                 c.getContext('2d').fill();
@@ -155,9 +156,6 @@ function touchMove(event) {
 
 function InitDragDrop() {
     var el = document.body;
-	
-	document.addEventListener("mouseup", OnMouseUp, false);
-	document.addEventListener("mousedown", OnMouseDown, false);
     document.ontouchstart = OnMouseDown;
     document.ontouchend = OnMouseUp;
     document.onmousedown = OnMouseDown;
@@ -202,7 +200,7 @@ function OnMouseDown(e) {
                 }
                 // we need to access the element in OnMouseMove
                 _dragElement = target;
-				document.addEventListener("mousemove", OnMouseMove, false);
+
                 // tell our code to start moving the element with the mouse
                 document.onmousemove = OnMouseMove;
                 document.ontouchmove = OnMouseMove;
@@ -242,8 +240,7 @@ function OnMouseUp(e) {
  _dragElement.setAttribute("leftofimage",parseFloat(_dragElement.getAttribute("imageleftoffset"))+parseFloat(_dragElement.style.left));
          _dragElement.setAttribute("topofimage",parseFloat(_dragElement.getAttribute("imagetopoffset"))+parseFloat(_dragElement.style.top));
         // we're done with these events until the next OnMouseDown
-        document.removeEventListener("mousemove", OnMouseMove, false);
-		document.onmousemove = null;
+        document.onmousemove = null;
         document.onselectstart = null;
         _dragElement.ondragstart = null;
         document.ontouchmove = null;
@@ -266,4 +263,4 @@ function ExtractNumber(value) {
 // this is simply a shortcut for the eyes and fingers
 function $(id) {
     return document.getElementById(id);
-}// JavaScript Document
+}
