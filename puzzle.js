@@ -1,7 +1,7 @@
 var pieces = new Array();
 var puzzle = (function () {
-    var xmax = 13.0;
-    var ymax = 13.0;
+    var xmax = 5.0;
+    var ymax = 5.0;
     var canvasarray = new Array();
     var imagesave = new Image();
     return {
@@ -37,7 +37,7 @@ var puzzle = (function () {
                         c.setAttribute("outright", (Math.round(Math.random()) === 1) ? "true" : "false");
                         c.setAttribute("outbottom", (Math.round(Math.random()) === 1) ? "true" : "false");
                         //c.setAttribute("topedge",(((Math.random()/2.0)+.5)*hsize));
-                        if (i + (wsize * 2.0) <= imagesave.width) {
+                        if (i + (wsize * 2.0)-1 <= imagesave.width) {
                             c.setAttribute("rightedge", (((Math.random() / 5.0) + .5) * Math.sqrt((wsize * wsize) + (hsize * hsize)) / 2.0));
                             if (c.getAttribute("outright") == "true") {
                                 c.getContext("2d").moveTo((((xpos < 0) ? 0 : (wsize / 2.0)) + wsize) + (parseInt(c.getAttribute("rightedge")) / 7.0), ((j + (hsize * 2.0) > imagesave.height) ? hsize / 4.0 : 0) + ((ypos < 0) ? (hsize / 2.0) : height / 2.0));
@@ -100,7 +100,7 @@ var puzzle = (function () {
                             }
                         }
                         //
-                        if (i + (wsize * 2.0) <= imagesave.width) {
+                        if (i + (wsize * 2.0)-1 <= imagesave.width) {
                             if (c.getAttribute("outright") == "false") {
                                 c.getContext("2d").beginPath();
                                 c.getContext("2d").arc(
