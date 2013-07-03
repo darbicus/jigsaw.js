@@ -69,7 +69,7 @@ this.can.setAttribute("topofimage", this.can.topside[1] + (this.can.offsetTop));
         ctx.clip();
         ctx.drawImage(img1, this.canvas.sx, this.canvas.sy);
         //ctx.scale((w+h)/h,(w+h)/w);
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 1;
 ctx.stroke();
         //ctx.stroke();
         //ctx.rect(25,25,225,225);
