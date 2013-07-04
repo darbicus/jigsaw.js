@@ -208,13 +208,14 @@ ctx.stroke();
     }
 
     function OnMouseDown(e) {
-                            for (var j = 0; j < p.length; j++) {
-                        p[j].can.style.zIndex = j;
-                    }
+                     //       for (var j = 0; j < p.length; j++) {
+                     //   p[j].can.style.zIndex = j;
+                    //}
         // IE is retarded and doesn't pass the event object
         if (e == null) e = window.event;
         for (var i = 0; i < p.length; i++) {
             var target = p[i].can;
+            target.style.zIndex = p.length-i;
             // IE uses srcElement, others use target
             //var target = e.target != null ? e.target : e.srcElement;
 
