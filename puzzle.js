@@ -69,7 +69,7 @@ this.can.setAttribute("topofimage", this.can.topside[1] + (this.can.offsetTop));
         ctx.clip();
         ctx.drawImage(img1, this.canvas.sx, this.canvas.sy);
         //ctx.scale((w+h)/h,(w+h)/w);
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 3;
 ctx.stroke();
         //ctx.stroke();
         //ctx.rect(25,25,225,225);
@@ -208,13 +208,14 @@ ctx.stroke();
     }
 
     function OnMouseDown(e) {
-                            for (var j = 0; j < p.length; j++) {
-                        p[j].can.style.zIndex = j;
-                    }
+                     //       for (var j = 0; j < p.length; j++) {
+                     //   p[j].can.style.zIndex = j;
+                    //}
         // IE is retarded and doesn't pass the event object
         if (e == null) e = window.event;
         for (var i = 0; i < p.length; i++) {
             var target = p[i].can;
+            target.style.zIndex = p.length-i;
             // IE uses srcElement, others use target
             //var target = e.target != null ? e.target : e.srcElement;
 
@@ -239,6 +240,7 @@ ctx.stroke();
                 var widthofimage = parseFloat(target.getAttribute("widthofimage"));
                 var heightofimage = parseFloat(target.getAttribute("heightofimage"));
                 _oldZIndex = target.style.zIndex;
+                p.splice(i,1);
                 target.style.zIndex = 10000;
                 if ((e.pageX >= leftofimage) && (e.pageX <= leftofimage + widthofimage) && (e.pageY >= topofimage) && (e.pageY <= topofimage + heightofimage)) {
 
@@ -281,10 +283,12 @@ ctx.stroke();
 
     function OnMouseUp(e) {
         if (_dragElement != null) {
-                                for (var j = 0; j < p.length; j++) {
+                    for (var j = 0; j < p.length; j++) {
                         p[j].can.style.zIndex = j;
                     }
-            _dragElement.style.zIndex = p.length;
+                    p.push(_dragElement);
+            _dragElement.style.zIndex = p.length-1;
+            
             _dragElement.setAttribute("leftofimage", parseFloat(_dragElement.getAttribute("imageleftoffset")) + parseFloat(_dragElement.style.left));
             _dragElement.setAttribute("topofimage", parseFloat(_dragElement.getAttribute("imagetopoffset")) + parseFloat(_dragElement.style.top));
             // we're done with these events until the next OnMouseDown
