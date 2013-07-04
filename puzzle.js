@@ -239,6 +239,7 @@ ctx.stroke();
                 var widthofimage = parseFloat(target.getAttribute("widthofimage"));
                 var heightofimage = parseFloat(target.getAttribute("heightofimage"));
                 _oldZIndex = target.style.zIndex;
+                p.splice(i,1);
                 target.style.zIndex = 10000;
                 if ((e.pageX >= leftofimage) && (e.pageX <= leftofimage + widthofimage) && (e.pageY >= topofimage) && (e.pageY <= topofimage + heightofimage)) {
 
@@ -281,10 +282,12 @@ ctx.stroke();
 
     function OnMouseUp(e) {
         if (_dragElement != null) {
-                                for (var j = 0; j < p.length; j++) {
+                    for (var j = 0; j < p.length; j++) {
                         p[j].can.style.zIndex = j;
                     }
-            _dragElement.style.zIndex = p.length;
+                    p.push(_dragElement);
+            _dragElement.style.zIndex = p.length-1;
+            
             _dragElement.setAttribute("leftofimage", parseFloat(_dragElement.getAttribute("imageleftoffset")) + parseFloat(_dragElement.style.left));
             _dragElement.setAttribute("topofimage", parseFloat(_dragElement.getAttribute("imagetopoffset")) + parseFloat(_dragElement.style.top));
             // we're done with these events until the next OnMouseDown
