@@ -1,7 +1,7 @@
 var columns = 10;
 var rows = 30;
 var img1 = new Image();
-img1.src = "http://crazyprofile.com/myspace_graphics/imgs/gothic_girls026.jpg";
+img1.src = "gothic_girls026.jpg";
 img1.onload = function () {
     var p = new Array();
 
@@ -246,7 +246,7 @@ ctx.stroke();
 
 
                     // we need to access the element in OnMouseMove
-                    _dragElement = target;
+                    _dragElement = p[i];
 
                     // tell our code to start moving the element with the mouse
                     document.onmousemove = OnMouseMove;
@@ -274,8 +274,8 @@ ctx.stroke();
         if (e == null) var e = window.event;
 
         // this is the actual "    drag code "
-        _dragElement.style.left = (_offsetX + e.clientX - _startX) + 'px';
-        _dragElement.style.top = (_offsetY + e.clientY - _startY) + 'px';
+        _dragElement.can.style.left = (_offsetX + e.clientX - _startX) + 'px';
+        _dragElement.can.style.top = (_offsetY + e.clientY - _startY) + 'px';
 
         // _debug.innerHTML = '(' + _dragElement.style.left + ', ' + 
         //     _dragElement.style.top + ')';   
@@ -287,14 +287,14 @@ ctx.stroke();
                         p[j].can.style.zIndex = j;
                     }
                     p.push(_dragElement);
-            _dragElement.style.zIndex = p.length-1;
+            _dragElement.can.style.zIndex = p.length-1;
             
-            _dragElement.setAttribute("leftofimage", parseFloat(_dragElement.getAttribute("imageleftoffset")) + parseFloat(_dragElement.style.left));
-            _dragElement.setAttribute("topofimage", parseFloat(_dragElement.getAttribute("imagetopoffset")) + parseFloat(_dragElement.style.top));
+            _dragElement.can.setAttribute("leftofimage", parseFloat(_dragElement.getAttribute("imageleftoffset")) + parseFloat(_dragElement.style.left));
+            _dragElement.can.setAttribute("topofimage", parseFloat(_dragElement.getAttribute("imagetopoffset")) + parseFloat(_dragElement.style.top));
             // we're done with these events until the next OnMouseDown
             document.onmousemove = null;
             document.onselectstart = null;
-            _dragElement.ondragstart = null;
+            _dragElement.can.ondragstart = null;
             document.ontouchmove = null;
             // this is how we know we're not dragging      
             _dragElement = null;
