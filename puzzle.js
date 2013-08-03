@@ -246,7 +246,7 @@ ctx.stroke();
 
 
                     // we need to access the element in OnMouseMove
-                    _dragElement = p[i];
+                    _dragElement = target;
 
                     // tell our code to start moving the element with the mouse
                     document.onmousemove = OnMouseMove;
