@@ -1,7 +1,7 @@
 var columns = 10;
 var rows = 30;
 var img1 = new Image();
-img1.src = "http://crazyprofile.com/myspace_graphics/imgs/gothic_girls026.jpg";
+img1.src = "gothic_girls026.jpg";
 img1.onload = function () {
     var p = new Array();
 
@@ -246,7 +246,7 @@ ctx.stroke();
 
 
                     // we need to access the element in OnMouseMove
-                    _dragElement = target;
+                    _dragElement = p[i];
 
                     // tell our code to start moving the element with the mouse
                     document.onmousemove = OnMouseMove;
