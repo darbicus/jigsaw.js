@@ -1,4 +1,4 @@
-function clone(obj) {
+document.getElementById('image').onload = function(){function clone(obj) {
     if (null === obj || "object" != typeof obj) return obj;
     var copy = obj.constructor();
     for (var attr in obj) {
@@ -269,7 +269,7 @@ for (var l = 0; l < rows; l++) {
                     "last": new Point(k * square, l * square)
             }
         }));
-        p[p.length-1].canvas.style.setProperty("top", document.getElementById("image").height*Math.random()*2.0 + "px");
+        p[p.length-1].canvas.style.setProperty("top", document.getElementById("image").height*Math.random*2.0 + "px");
         p[p.length-1].canvas.style.setProperty("left", document.getElementById("image").width*Math.random()*2.0 + "px");
 
         if (k !== 0) {
@@ -309,7 +309,7 @@ for (var i = 0; i < p.length; i++) {
     p[i].canvas.style.zIndex = i;
     p[i].display();
     p[i].connected.push(p[i]);
-            for (var rotation = Math.floor(Math.random()*4.0);rotation<=4;rotation++){
+            for (var rotation = Math.round(Math.random()*4.0);rotation<4;rotation++){
             p[i].rotate(p[i]);
         }
 }
@@ -463,3 +463,4 @@ function checkForMatches(e) {
     }
 
 }
+                                                    };
